@@ -242,6 +242,36 @@ button {
   background: #FEFAF4;
 }
 
+/* MENU MASONRY — desktop: 3 columns */
+.menu-masonry {
+  column-count: 3;
+  column-gap: 20px;
+}
+
+.menu-masonry-item {
+  break-inside: avoid;
+  margin-bottom: 20px;
+}
+
+/* MENU ITEM GRID — desktop: 2 columns for big categories */
+.menu-items-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 20px;
+}
+
+.menu-items-single {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+/* CUSTOMISE STRIP */
+.menu-custom-strip {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
 /* TABLET */
 @media(max-width:1024px) {
   .masonry-col:nth-child(4) {
@@ -277,9 +307,14 @@ button {
     grid-template-columns: 1fr !important;
   }
 
+  /* 2-column grid for stats and testimonials on mobile */
+  .g4-2col {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
   /* Restore natural padding */
   .spad {
-    padding: 30px 20px;
+    padding: 60px 20px !important;
   }
 
   .shead {
@@ -293,7 +328,7 @@ button {
   }
 
   .masonry-grid {
-    gap: 16px;
+    gap: 14px;
   }
 
   /* Force exactly 2 columns on mobile */
@@ -301,17 +336,61 @@ button {
     display: none;
   }
 
+  /* Menu: single column on mobile */
   .menu-masonry {
-    column-count: 1;
+    column-count: 1 !important;
   }
 
-  /* Stack menu items in 1 column on mobile */
   .menu-items-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+
+  /* Customise strip: stack vertically on mobile */
+  .menu-custom-strip {
+    flex-direction: column;
+    align-items: flex-start;
     gap: 12px;
   }
 
   .hero-sub {
     display: none !important;
+  }
+
+  /* Hero content: reduce top padding on mobile */
+  .hero-content {
+    padding: 110px 20px 60px !important;
+  }
+
+  /* About page: hide or reposition floating badge on mobile */
+  .about-badge {
+    display: none !important;
+  }
+
+  /* Contact form: reduce padding on mobile */
+  .contact-form-card {
+    padding: 28px 20px !important;
+  }
+
+  /* Floating CTA: smaller buttons, closer to edge */
+  .float-cta {
+    bottom: 16px !important;
+    right: 16px !important;
+  }
+
+  .float-cta-btn {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  /* Section head spacing on mobile */
+  .section-head-wrap {
+    margin-bottom: 36px !important;
+  }
+
+  /* Page heroes: reduce min-height on mobile */
+  .page-hero {
+    min-height: 44vh !important;
+    padding: 100px 0 52px !important;
   }
 }

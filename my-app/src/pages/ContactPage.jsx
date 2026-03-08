@@ -21,7 +21,7 @@ export function ContactPage() {
 
     return (
         <div className="page">
-            <section style={{ background: `linear-gradient(145deg,${T.dark} 0%,#4A1010 50%,${T.berry} 100%)`, minHeight: "50vh", display: "flex", alignItems: "flex-end", padding: "130px 0 72px", position: "relative", overflow: "hidden" }}>
+            <section className="page-hero" style={{ background: `linear-gradient(145deg,${T.dark} 0%,#4A1010 50%,${T.berry} 100%)`, minHeight: "50vh", display: "flex", alignItems: "flex-end", padding: "130px 0 72px", position: "relative", overflow: "hidden" }}>
                 <div style={{ position: "absolute", inset: 0, opacity: .04, backgroundImage: "radial-gradient(circle,rgba(255,255,255,1) 1px,transparent 1px)", backgroundSize: "30px 30px" }} />
                 <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 28px", width: "100%", position: "relative", zIndex: 1 }}>
                     <Fade>
@@ -103,7 +103,7 @@ export function ContactPage() {
 
                         {/* RIGHT — FORM */}
                         <Fade delay={.1}>
-                            <div style={{ background: "#fff", padding: "44px 40px", borderRadius: 24, boxShadow: "0 10px 50px rgba(91,26,26,.1)", border: `1px solid ${T.linen}` }}>
+                            <div className="contact-form-card" style={{ background: "#fff", padding: "44px 40px", borderRadius: 24, boxShadow: "0 10px 50px rgba(91,26,26,.1)", border: `1px solid ${T.linen}` }}>
                                 <h2 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.9rem", fontWeight: 700, color: T.dark, marginBottom: 6 }}>Send a Message</h2>
                                 <p style={{ fontSize: ".83rem", color: T.mink, marginBottom: 28, lineHeight: 1.6 }}>We'll reply via WhatsApp within a few hours. Fields marked * are required.</p>
 

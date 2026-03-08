@@ -197,14 +197,15 @@ export function GalleryPage() {
         return arr;
     }, []);
 
-    // Responsive: 4 cols on wide, 2 cols handled via CSS
-    const columns = buildColumns(shuffledGallery, 4);
+    // Responsive: 4 cols on wide, 2 cols on mobile (detected at render time)
+    const colCount = typeof window !== 'undefined' && window.innerWidth <= 768 ? 2 : 4;
+    const columns = buildColumns(shuffledGallery, colCount);
 
     return (
         <div className="page">
 
             {/* PAGE HERO */}
-            <section style={{ background: `linear-gradient(145deg,${T.dark} 0%,#4A1010 50%,${T.berry} 100%)`, minHeight: '50vh', display: 'flex', alignItems: 'flex-end', padding: '130px 0 72px', position: 'relative', overflow: 'hidden' }}>
+            <section className="page-hero" style={{ background: `linear-gradient(145deg,${T.dark} 0%,#4A1010 50%,${T.berry} 100%)`, minHeight: '50vh', display: 'flex', alignItems: 'flex-end', padding: '130px 0 72px', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', inset: 0, opacity: .04, backgroundImage: 'radial-gradient(circle,rgba(255,255,255,1) 1px,transparent 1px)', backgroundSize: '30px 30px' }} />
                 <div style={{ maxWidth: 1240, margin: '0 auto', padding: '0 28px', width: '100%', position: 'relative', zIndex: 1 }}>
                     <Fade>

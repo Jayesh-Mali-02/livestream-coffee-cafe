@@ -41,7 +41,7 @@ export function HomePage({ setPage }) {
                 <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 200, background: `linear-gradient(to top,${T.dark},transparent)`, zIndex: 1 }} />
 
                 {/* CONTENT */}
-                <div style={{ position: "relative", zIndex: 2, textAlign: "center", color: "#fff", padding: "160px 24px 80px", maxWidth: 900, width: "100%" }}>
+                <div className="hero-content" style={{ position: "relative", zIndex: 2, textAlign: "center", color: "#fff", padding: "160px 24px 80px", maxWidth: 900, width: "100%" }}>
 
                     {/* Location pill */}
                     <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", marginBottom: 40, animation: "fadeUp .8s ease .2s both" }}>
@@ -112,7 +112,7 @@ export function HomePage({ setPage }) {
 
             {/* ── STATS STRIP ──────────────────────────────────────────────── */}
             <section style={{ background: `linear-gradient(100deg,${T.dark} 0%,#3A0E0E 50%,${T.dark} 100%)`, padding: "0", borderBottom: `1px solid rgba(255,255,255,.04)` }}>
-                <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 28px", display: "grid", gridTemplateColumns: "repeat(4,1fr)" }} className="g4">
+                <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 28px", display: "grid", gridTemplateColumns: "repeat(4,1fr)" }} className="g4 g4-2col">
                     {STATS.map((s, i) => (
                         <Fade key={s.val} delay={i * .07}>
                             <div style={{ textAlign: "center", padding: "40px 20px", borderRight: i < 3 ? `1px solid rgba(255,255,255,.06)` : "none", position: "relative" }}>
@@ -162,7 +162,7 @@ export function HomePage({ setPage }) {
             <section style={{ padding: "110px 0", background: T.parchm }} className="spad">
                 <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 28px" }}>
                     <SectionHead tag="What People Say" title="Loved By Surat" sub="Real reviews from our regulars — the people who make Livestream home." />
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20 }} className="g4">
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20 }} className="g4 g4-2col">
                         {TESTIMONIALS.map((t, i) => (
                             <Fade key={t.name} delay={i * .09}>
                                 <div className="tcard" style={{ background: "#fff", borderRadius: 20, padding: "28px 24px", boxShadow: "0 2px 16px rgba(91,26,26,.07)", border: `1px solid ${T.linen}`, height: "100%", display: "flex", flexDirection: "column", position: "relative" }}>

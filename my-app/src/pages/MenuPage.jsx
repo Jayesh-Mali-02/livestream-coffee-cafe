@@ -91,14 +91,7 @@ function CategoryCard({ cat, i }) {
                 }} />
 
                 {/* Item list */}
-                <div 
-                    className={useTwoCol ? "menu-items-grid" : ""}
-                    style={{
-                        display: 'grid',
-                        gridTemplateColumns: useTwoCol ? 'repeat(2,1fr)' : '1fr',
-                        gap: useTwoCol ? '0 20px' : 0,
-                    }}
-                >
+                <div className={useTwoCol ? "menu-items-grid" : "menu-items-single"}>
                     {cat.items.map((item, j) => (
                         <ItemRow
                             key={item.name}
@@ -125,7 +118,7 @@ export function MenuPage() {
         <div className="page">
 
             {/* ── HERO — matches other page heroes exactly ── */}
-            <section style={{
+            <section className="page-hero" style={{
                 background: `linear-gradient(145deg,${T.dark} 0%,#4A1010 50%,${T.berry} 100%)`,
                 minHeight: '48vh',
                 display: 'flex', alignItems: 'flex-end',
@@ -186,9 +179,9 @@ export function MenuPage() {
                     </div>
 
                     {/* MASONRY — tight packing like gallery */}
-                    <div style={{ columnCount: 3, columnGap: 20 }} className="menu-masonry">
+                    <div className="menu-masonry">
                         {DATA.map((cat, i) => (
-                            <div key={cat.cat} style={{ breakInside: 'avoid', marginBottom: 20 }}>
+                            <div key={cat.cat} className="menu-masonry-item">
                                 <CategoryCard cat={cat} i={i} />
                             </div>
                         ))}
@@ -196,13 +189,12 @@ export function MenuPage() {
 
                     {/* CUSTOMISE STRIP */}
                     <Fade>
-                        <div style={{
+                        <div className="menu-custom-strip" style={{
                             marginTop: 40, padding: '20px 26px',
                             background: '#fff',
                             borderRadius: 18,
                             border: `1px solid ${T.linen}`,
                             boxShadow: '0 2px 12px rgba(91,26,26,.06)',
-                            display: 'flex', alignItems: 'center', gap: 14,
                         }}>
                             <div style={{
                                 width: 44, height: 44, borderRadius: 13, flexShrink: 0,

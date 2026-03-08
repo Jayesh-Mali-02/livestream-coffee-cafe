@@ -17,7 +17,7 @@ export function AboutPage({ setPage }) {
     return (
         <div className="page">
             {/* PAGE HERO */}
-            <section style={{ background: `linear-gradient(145deg,${T.dark} 0%,#4A1010 55%,${T.berry} 100%)`, minHeight: "56vh", display: "flex", alignItems: "flex-end", padding: "130px 0 80px", position: "relative", overflow: "hidden" }}>
+            <section className="page-hero" style={{ background: `linear-gradient(145deg,${T.dark} 0%,#4A1010 55%,${T.berry} 100%)`, minHeight: "56vh", display: "flex", alignItems: "flex-end", padding: "130px 0 80px", position: "relative", overflow: "hidden" }}>
                 <div style={{ position: "absolute", inset: 0, opacity: .04, backgroundImage: "radial-gradient(circle,rgba(255,255,255,1) 1px,transparent 1px)", backgroundSize: "30px 30px" }} />
                 <div style={{ position: "absolute", right: -80, top: "50%", transform: "translateY(-50%)", opacity: .04, fontSize: "22rem", lineHeight: 1, userSelect: "none" }}>☕</div>
                 <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 28px", width: "100%", position: "relative", zIndex: 1 }}>
@@ -57,7 +57,7 @@ export function AboutPage({ setPage }) {
                                 </div>
                                 
                                 {/* Floating Badge Image */}
-                                <div style={{
+                                <div className="about-badge" style={{
                                     position: "absolute",
                                     bottom: -32,
                                     right: -32,

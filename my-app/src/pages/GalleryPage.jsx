@@ -170,17 +170,7 @@ function TiltCard({ item, index, onClick, revealed }) {
     );
 }
 
-/* ─── Distribute items across N columns (shortest-column first) ─────────── */
-function buildColumns(items, n) {
-    const cols = Array.from({ length: n }, () => []);
-    const heights = new Array(n).fill(0);
-    items.forEach((item, i) => {
-        const col = heights.indexOf(Math.min(...heights));
-        cols[col].push({ ...item, originalIndex: i });
-        heights[col] += item.h + 24; // gap
-    });
-    return cols;
-}
+
 
 /* ─── Main page ─────────────────────────────────────────────────────────── */
 export function GalleryPage() {
@@ -197,10 +187,7 @@ export function GalleryPage() {
         return arr;
     }, []);
 
-    // Responsive: 4 cols on wide, 2 cols on mobile (detected at render time)
-    const colCount = typeof window !== 'undefined' && window.innerWidth <= 768 ? 2 : 4;
-    const columns = buildColumns(shuffledGallery, colCount);
-
+    // Pure CSS masonry handles responsiveness
     return (
         <div className="page">
 
@@ -220,25 +207,21 @@ export function GalleryPage() {
             <section style={{ padding: '72px 0 100px', background: T.cream }} className="spad">
                 <div style={{ maxWidth: 1240, margin: '0 auto', padding: '0 28px' }}>
 
-                    {/* 4-column masonry via JS + CSS flex */}
-                    <div className="masonry-grid">
-                        {columns.map((col, ci) => (
-                            <div key={ci} className="masonry-col">
-                                {col.map((item) => (
-                                    <div
-                                        key={item.label + item.originalIndex}
-                                        ref={(el) => setRef(el, item.originalIndex)}
-                                        data-index={item.originalIndex}
-                                        style={{ marginBottom: 24 }}
-                                    >
-                                        <TiltCard
-                                            item={item}
-                                            index={item.originalIndex}
-                                            onClick={setLight}
-                                            revealed={visible[item.originalIndex]}
-                                        />
-                                    </div>
-                                ))}
+                    {/* Pure CSS Masonry Grid */}
+                    <div className="gallery-masonry">
+                        {shuffledGallery.map((item) => (
+                            <div
+                                key={item.label + item.originalIndex}
+                                ref={(el) => setRef(el, item.originalIndex)}
+                                data-index={item.originalIndex}
+                                className="gallery-masonry-item"
+                            >
+                                <TiltCard
+                                    item={item}
+                                    index={item.originalIndex}
+                                    onClick={setLight}
+                                    revealed={visible[item.originalIndex]}
+                                />
                             </div>
                         ))}
                     </div>

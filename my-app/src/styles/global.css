@@ -197,18 +197,17 @@ button {
 }
 
 
-/* GALLERY — Masonry */
-.masonry-grid {
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
+/* GALLERY — Masonry CSS */
+.gallery-masonry {
+  column-count: 4;
+  column-gap: 24px;
 }
 
-.masonry-col {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-width: 0;
+.gallery-masonry-item {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 24px;
+  vertical-align: top;
 }
 
 /* hover overlay on tilt cards */
@@ -274,8 +273,8 @@ button {
 
 /* TABLET */
 @media(max-width:1024px) {
-  .masonry-col:nth-child(4) {
-    display: none;
+  .gallery-masonry {
+    column-count: 3;
   }
 
   .g4 {
@@ -327,13 +326,13 @@ button {
     gap: 32px !important;
   }
 
-  .masonry-grid {
-    gap: 14px;
+  .gallery-masonry {
+    column-count: 2;
+    column-gap: 14px;
   }
 
-  /* Force exactly 2 columns on mobile */
-  .masonry-col:nth-child(n+3) {
-    display: none;
+  .gallery-masonry-item {
+    margin-bottom: 14px;
   }
 
   /* Menu: single column on mobile */

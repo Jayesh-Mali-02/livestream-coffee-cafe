@@ -162,7 +162,7 @@ export function HomePage({ setPage }) {
             <section style={{ padding: "110px 0", background: T.parchm }} className="spad">
                 <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 28px" }}>
                     <SectionHead tag="What People Say" title="Loved By Surat" sub="Real reviews from our regulars — the people who make Livestream home." />
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20 }} className="g4 g4-2col">
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20 }} className="g4">
                         {TESTIMONIALS.map((t, i) => (
                             <Fade key={t.name} delay={i * .09}>
                                 <div className="tcard" style={{ background: "#fff", borderRadius: 20, padding: "28px 24px", boxShadow: "0 2px 16px rgba(91,26,26,.07)", border: `1px solid ${T.linen}`, height: "100%", display: "flex", flexDirection: "column", position: "relative" }}>

@@ -204,8 +204,8 @@ export function GalleryPage() {
             </section>
 
             {/* MASONRY GRID */}
-            <section style={{ padding: '72px 0 100px', background: T.cream }} className="spad">
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '0 28px' }}>
+            <section style={{ padding: '72px 0 100px', background: T.cream }} className="spad gallery-sec">
+                <div style={{ maxWidth: 1240, margin: '0 auto' }} className="gallery-cont">
 
                     {/* Pure CSS Masonry Grid */}
                     <div className="gallery-masonry">

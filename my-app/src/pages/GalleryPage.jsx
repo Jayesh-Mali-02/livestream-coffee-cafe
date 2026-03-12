@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Fade } from '../components/ui/Fade';
 import { T, INSTA } from '../utils/constants';
 import { GALLERY } from '../data/gallery';
@@ -133,10 +134,6 @@ function TiltCard({ item, index, onClick, revealed }) {
                 style={{
                     position: 'absolute',
                     inset: '-8px',       /* extra bleed so edges don't show on tilt */
-                    background: item.bg,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    imageRendering: '-webkit-optimize-contrast', // Chrome/Safari crisp scaling
                     willChange: 'transform',
                     backfaceVisibility: 'hidden',  /* force crisp rendering */
                     transform: 'translateZ(0)',    /* trigger GPU */
@@ -148,9 +145,15 @@ function TiltCard({ item, index, onClick, revealed }) {
                     gap: 10,
                 }}
             >
-                <span style={{ fontSize: '2.6rem', filter: 'drop-shadow(0 4px 12px rgba(0,0,0,.3))', display: 'none' }}>
-                    {item.emoji}
-                </span>
+                {item.bg && (
+                    <img 
+                        src={item.bg.replace(/^url\(['"](.+)['"]\)$/, '$1')} 
+                        alt="Gallery Image" 
+                        loading="lazy" 
+                        decoding="async"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', imageRendering: '-webkit-optimize-contrast', pointerEvents: 'none' }} 
+                    />
+                )}
             </div>
 
             {/* inner border gloss */}
@@ -190,6 +193,10 @@ export function GalleryPage() {
     // Pure CSS masonry handles responsiveness
     return (
         <div className="page">
+            <Helmet>
+                <title>Gallery | Livestream Coffee</title>
+                <meta name="description" content="A glimpse inside Livestream Coffee. See our beautifully crafted spaces, artisan coffee, and food at our Vesu, Piplod, and Pal cafes." />
+            </Helmet>
 
             {/* PAGE HERO */}
             <section className="page-hero" style={{ background: `linear-gradient(145deg,${T.dark} 0%,#4A1010 50%,${T.berry} 100%)`, minHeight: '50vh', display: 'flex', alignItems: 'flex-end', padding: '130px 0 72px', position: 'relative', overflow: 'hidden' }}>

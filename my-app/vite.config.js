@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [react()],
-    base: './', // Makes asset paths relative so it works on GitHub Pages
+    base: '/', // Absolute base required for React Router (BrowserRouter) on Vercel
     build: {
         rollupOptions: {
             output: {

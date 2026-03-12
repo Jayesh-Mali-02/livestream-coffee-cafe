@@ -1,12 +1,16 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
 import { useScrollY } from '../hooks/useScrollY';
 import { Fade } from '../components/ui/Fade';
 import { SectionHead } from '../components/ui/SectionHead';
 import { BRANCHES, T, TESTIMONIALS, WHATSAPP } from '../utils/constants';
 import { IcUsers, IcUtensils, IcStar, IcTrophy, IcDiamond, LogoSVG, IcClock, IcCalendar, IcPin, IcCoffee, IcSofa, IcWhatsApp } from '../components/ui/Icons';
 
-export function HomePage({ setPage }) {
+export function HomePage() {
     const y = useScrollY();
+    const navigate = useNavigate();
+    const setPage = (id) => navigate(id === 'home' ? '/' : `/${id}`);
 
     const STATS = [
         { icon: <IcUsers s={24} c="rgba(255,255,255,.7)" />, val: "500+", lbl: "Daily Guests" },
@@ -17,6 +21,28 @@ export function HomePage({ setPage }) {
 
     return (
         <div className="page">
+            <Helmet>
+                <title>Livestream Coffee | Specialty Coffee & Handcrafted Food in Surat</title>
+                <meta name="description" content="Welcome to Livestream Coffee. Experience Surat's best specialty coffee, artisan food, and aesthetic vibes. Visit our Vesu, Piplod, or Pal cafes today." />
+                <script type="application/ld+json">
+                    {`
+                    {
+                      "@context": "https://schema.org",
+                      "@type": "CafeOrCoffeeShop",
+                      "name": "Livestream Coffee",
+                      "image": "https://livestreamcoffee.com/assets/images/hero.jpg",
+                      "priceRange": "$$",
+                      "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": "Surat",
+                        "addressRegion": "Gujarat",
+                        "addressCountry": "IN"
+                      },
+                      "openingHours": "Mo-Su 09:00-00:00"
+                    }
+                    `}
+                </script>
+            </Helmet>
 
             {/* ── HERO ─────────────────────────────────────────────────────── */}
             <section style={{ position: "relative", minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>

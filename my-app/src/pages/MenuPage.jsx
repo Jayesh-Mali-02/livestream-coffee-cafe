@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Fade } from '../components/ui/Fade';
 import { T } from '../utils/constants';
 import { DRINKS, FOOD } from '../data/menu';
@@ -116,6 +117,10 @@ export function MenuPage() {
 
     return (
         <div className="page">
+            <Helmet>
+                <title>Menu | Livestream Coffee</title>
+                <meta name="description" content="Explore Livestream Coffee's menu of specialty coffees, handcrafted espresso, pour-overs, and artisan food freshly prepared every morning in Surat." />
+            </Helmet>
 
             {/* ── HERO — matches other page heroes exactly ── */}
             <section className="page-hero" style={{

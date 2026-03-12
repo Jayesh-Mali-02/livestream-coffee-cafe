@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&display=swap');
-
 *,
 *::before,
 *::after {
@@ -276,19 +274,8 @@ button {
   padding: 0 28px;
 }
 
-/* TABLET */
+/* TABLET AND SMALL LAPTOPS (1024px) */
 @media(max-width:1024px) {
-  .gallery-masonry {
-    column-count: 3;
-  }
-
-  .g4 {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-}
-
-/* MOBILE */
-@media(max-width:768px) {
   .page {
     overflow-x: hidden;
   }
@@ -301,6 +288,17 @@ button {
     display: flex !important;
   }
 
+  .gallery-masonry {
+    column-count: 3;
+  }
+
+  .g4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* MOBILE */
+@media(max-width:768px) {
   .g2 {
     grid-template-columns: 1fr !important;
     gap: 40px !important;

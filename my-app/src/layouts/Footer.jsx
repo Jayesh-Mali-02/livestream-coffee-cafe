@@ -1,8 +1,9 @@
 import React from 'react';
 import { T, INSTA, WHATSAPP, NAV } from '../utils/constants';
 import { LogoSVG, IcInstagram, IcWhatsApp } from '../components/ui/Icons';
+import { Link } from 'react-router-dom';
 
-export function Footer({ setPage }) {
+export function Footer() {
     return (
         <footer style={{ background: T.dark, color: "#FDF5E6", padding: "72px 0 0", position: "relative", overflow: "hidden" }}>
             <div style={{ position: "absolute", inset: 0, opacity: .025, backgroundImage: "radial-gradient(circle,rgba(255,255,255,1) 1px,transparent 1px)", backgroundSize: "28px 28px", pointerEvents: "none" }} />
@@ -23,15 +24,18 @@ export function Footer({ setPage }) {
                     <div>
                         <h4 style={{ fontSize: ".8rem", fontWeight: 700, marginBottom: 20, color: "rgba(255,255,255,.35)", letterSpacing: ".18em", textTransform: "uppercase" }}>Pages</h4>
                         <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: 11 }}>
-                            {NAV.map(n => (
+                            {NAV.map(n => {
+                                const path = n.id === 'home' ? '/' : `/${n.id}`;
+                                return (
                                 <li key={n.id}>
-                                    <button onClick={() => setPage(n.id)} style={{ background: "none", border: "none", color: "rgba(253,245,230,.5)", fontSize: ".84rem", cursor: "pointer", padding: 0, transition: "all .2s" }}
+                                    <Link to={path} style={{ textDecoration: 'none', display: 'inline-block', background: "none", border: "none", color: "rgba(253,245,230,.5)", fontSize: ".84rem", cursor: "pointer", padding: 0, transition: "all .2s" }}
                                         onMouseEnter={e => { e.currentTarget.style.color = "#fff"; e.currentTarget.style.paddingLeft = "6px"; }}
                                         onMouseLeave={e => { e.currentTarget.style.color = "rgba(253,245,230,.5)"; e.currentTarget.style.paddingLeft = "0"; }}>
                                         {n.label}
-                                    </button>
+                                    </Link>
                                 </li>
-                            ))}
+                                );
+                            })}
                         </ul>
                     </div>
 

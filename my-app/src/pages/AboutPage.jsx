@@ -1,4 +1,6 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
 import { Fade } from '../components/ui/Fade';
 import { SectionHead } from '../components/ui/SectionHead';
 import { T } from '../utils/constants';
@@ -12,10 +14,16 @@ const ICON_MAP = {
     IcPalette: (s, c) => <IcPalette s={s} c={c} />,
 };
 
-export function AboutPage({ setPage }) {
+export function AboutPage() {
+    const navigate = useNavigate();
+    const setPage = (id) => navigate(id === 'home' ? '/' : `/${id}`);
 
     return (
         <div className="page">
+            <Helmet>
+                <title>Our Story | Livestream Coffee</title>
+                <meta name="description" content="Learn the story behind Livestream Coffee. More than a cafe, we are a community space in Surat dedicated to specialty coffee and local connection." />
+            </Helmet>
             {/* PAGE HERO */}
             <section className="page-hero" style={{ background: `linear-gradient(145deg,${T.dark} 0%,#4A1010 55%,${T.berry} 100%)`, minHeight: "56vh", display: "flex", alignItems: "flex-end", padding: "130px 0 80px", position: "relative", overflow: "hidden" }}>
                 <div style={{ position: "absolute", inset: 0, opacity: .04, backgroundImage: "radial-gradient(circle,rgba(255,255,255,1) 1px,transparent 1px)", backgroundSize: "30px 30px" }} />
@@ -50,6 +58,7 @@ export function AboutPage({ setPage }) {
                                     <img 
                                         src="/assets/images/about/main.jpg" 
                                         alt="Livestream Coffee Interior" 
+                                        loading="lazy"
                                         style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} 
                                     />
                                     {/* subtle inner shadow/border overlay */}
@@ -73,6 +82,7 @@ export function AboutPage({ setPage }) {
                                     <img 
                                         src="/assets/images/about/badge.jpg" 
                                         alt="Livestream Detail" 
+                                        loading="lazy"
                                         style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} 
                                     />
                                 </div>

@@ -148,7 +148,7 @@ function TiltCard({ item, index, onClick, revealed }) {
                 {item.bg && (
                     <img 
                         src={item.bg.replace(/^url\(['"](.+)['"]\)$/, '$1')} 
-                        alt="Gallery Image" 
+                        alt={`${item.label || 'Livestream Coffee'} - specialty coffee cafe in Surat`} 
                         loading="lazy" 
                         decoding="async"
                         style={{ width: '100%', height: '100%', objectFit: 'cover', imageRendering: '-webkit-optimize-contrast', pointerEvents: 'none' }} 

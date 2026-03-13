@@ -30,7 +30,7 @@ export function HomePage() {
                       "@context": "https://schema.org",
                       "@type": "CafeOrCoffeeShop",
                       "name": "Livestream Coffee",
-                      "image": "https://livestreamcoffee.com/assets/images/hero.webp",
+                      "image": "https://livestreamcoffee.com/assets/images/hero.webp?v=2",
                       "priceRange": "$$",
                       "address": {
                         "@type": "PostalAddress",
@@ -61,7 +61,7 @@ export function HomePage() {
                 {/* BG */}
                 <div style={{
                     position: "absolute", inset: "-12%",
-                    backgroundImage: `url('/assets/images/hero.webp')`,
+                    backgroundImage: `url('/assets/images/hero.webp?v=2')`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     transform: `translateY(${y * .38}px)`, willChange: "transform",

@@ -75,40 +75,51 @@ export function BlogPage() {
                     <div style={{ display: "flex", flexDirection: "column", gap: 50 }}>
                         {ARTICLES.map((art, i) => (
                             <Fade key={art.id} delay={i * .08}>
-                                <div style={{ 
-                                    display: "flex", gap: 32, alignItems: "center", 
-                                    background: "#fff", padding: "24px", borderRadius: 24, 
+                                <div className="lift" style={{ 
+                                    display: "flex", gap: "clamp(24px, 4vw, 40px)", alignItems: "center", 
+                                    background: "#fff", padding: "clamp(16px, 3vw, 24px)", borderRadius: 24, 
                                     boxShadow: "0 4px 24px rgba(91,26,26,.06)", border: `1px solid ${T.linen}`,
-                                    flexWrap: "wrap"
+                                    flexWrap: "wrap", cursor: "pointer", overflow: "hidden"
+                                }}
+                                onMouseEnter={e => {
+                                    e.currentTarget.querySelector('img').style.transform = "scale(1.05)";
+                                    e.currentTarget.querySelector('.read-arr').style.transform = "translateX(6px)";
+                                    e.currentTarget.querySelector('.read-btn').style.color = T.gold;
+                                }}
+                                onMouseLeave={e => {
+                                    e.currentTarget.querySelector('img').style.transform = "scale(1)";
+                                    e.currentTarget.querySelector('.read-arr').style.transform = "none";
+                                    e.currentTarget.querySelector('.read-btn').style.color = T.berry;
                                 }}>
                                     {/* Image */}
                                     <div style={{ 
-                                        width: "100%", maxWidth: 300, height: 220, 
-                                        borderRadius: 16, overflow: "hidden", flexShrink: 0,
+                                        flex: "1 1 300px", maxWidth: "100%",
+                                        aspectRatio: "4/3",
+                                        borderRadius: 16, overflow: "hidden",
                                         position: "relative"
                                     }}>
                                         <div style={{ position: "absolute", top: 12, left: 12, background: "rgba(255,255,255,.9)", backdropFilter: "blur(8px)", color: T.wine, fontSize: ".65rem", fontWeight: 800, textTransform: "uppercase", letterSpacing: ".08em", padding: "6px 14px", borderRadius: 50, zIndex: 2 }}>
                                             {art.tag}
                                         </div>
-                                        <img src={art.img} alt={art.title} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform .5s ease" }} onMouseEnter={e => e.currentTarget.style.transform = "scale(1.05)"} onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"} />
+                                        <img src={art.img} alt={art.title} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform .6s cubic-bezier(.22,1,.36,1)" }} />
                                     </div>
                                     
                                     {/* Content */}
-                                    <div style={{ flex: 1, minWidth: 280, padding: "10px 0" }}>
-                                        <div style={{ display: "flex", gap: 14, alignItems: "center", fontSize: ".75rem", color: T.mink, marginBottom: 12, letterSpacing: ".02em" }}>
+                                    <div style={{ flex: "2 1 380px", minWidth: "280px", padding: "10px 0" }}>
+                                        <div style={{ display: "flex", gap: 14, alignItems: "center", fontSize: ".76rem", color: T.mink, marginBottom: 14, letterSpacing: ".03em", fontWeight: 500 }}>
                                             <span>{art.date}</span>
                                             <span style={{ width: 4, height: 4, background: "rgba(91,26,26,.2)", borderRadius: "50%" }} />
                                             <span>{art.readTime}</span>
                                         </div>
-                                        <h2 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.9rem", fontWeight: 700, color: T.dark, marginBottom: 14, lineHeight: 1.15 }}>
+                                        <h2 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(1.6rem, 3vw, 2.1rem)", fontWeight: 700, color: T.dark, marginBottom: 16, lineHeight: 1.15 }}>
                                             {art.title}
                                         </h2>
-                                        <p style={{ fontSize: ".9rem", color: T.espr, lineHeight: 1.7, opacity: .8, marginBottom: 20 }}>
+                                        <p style={{ fontSize: ".92rem", color: T.espr, lineHeight: 1.75, opacity: .85, marginBottom: 24, paddingRight: "4%" }}>
                                             {art.excerpt}
                                         </p>
-                                        <button style={{ background: "transparent", color: T.berry, fontSize: ".82rem", fontWeight: 700, border: "none", cursor: "pointer", padding: 0, display: "inline-flex", alignItems: "center", gap: 6, opacity: .9 }} onMouseEnter={e => e.currentTarget.style.opacity = 1} onMouseLeave={e => e.currentTarget.style.opacity = .9}>
-                                            Read Article <span style={{ transition: "transform .2s" }}>→</span>
-                                        </button>
+                                        <div className="read-btn" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: ".82rem", fontWeight: 700, color: T.berry, transition: "color .3s ease" }}>
+                                            Read Article <span className="read-arr" style={{ transition: "transform .3s ease", display: "inline-block" }}>→</span>
+                                        </div>
                                     </div>
                                 </div>
                             </Fade>

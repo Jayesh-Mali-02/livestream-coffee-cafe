@@ -13,12 +13,20 @@ export function Footer() {
                     <div>
                         <LogoSVG fill="#ffffff" style={{ width: 190, height: "auto", marginBottom: 18, opacity: .88 }} />
                         <p style={{ fontSize: ".83rem", opacity: .5, lineHeight: 1.8, maxWidth: 270, marginBottom: 20 }}>Where every cup tells a story. Premium specialty coffee &amp; handcrafted food across Surat — Vesu, Piplod &amp; Pal.</p>
-                        <a href={INSTA} target="_blank" rel="noopener noreferrer"
-                            style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "9px 18px", background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.1)", borderRadius: 50, fontSize: ".79rem", color: "rgba(255,255,255,.65)", transition: "all .3s ease" }}
-                            onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,.12)"; e.currentTarget.style.color = "#fff"; }}
-                            onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,.06)"; e.currentTarget.style.color = "rgba(255,255,255,.65)"; }}>
-                            <IcInstagram s={15} c="rgba(255,255,255,.65)" /> @livestreamcoffee
-                        </a>
+                        <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                            <a href={INSTA} target="_blank" rel="noopener noreferrer"
+                                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "9px 18px", background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.1)", borderRadius: 50, fontSize: ".79rem", color: "rgba(255,255,255,.65)", transition: "all .3s ease" }}
+                                onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,.12)"; e.currentTarget.style.color = "#fff"; }}
+                                onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,.06)"; e.currentTarget.style.color = "rgba(255,255,255,.65)"; }}>
+                                <IcInstagram s={15} c="rgba(255,255,255,.65)" /> @livestreamcoffee
+                            </a>
+                            <a href="https://jsdl.in/DT-541CENB8QKS" target="_blank" rel="noopener noreferrer"
+                                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "9px 18px", background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.1)", borderRadius: 50, fontSize: ".79rem", color: "rgba(255,255,255,.65)", transition: "all .3s ease" }}
+                                onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,.12)"; e.currentTarget.style.color = "#fff"; }}
+                                onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,.06)"; e.currentTarget.style.color = "rgba(255,255,255,.65)"; }}>
+                                🌟 Rate on Justdial
+                            </a>
+                        </div>
                     </div>
 
                     <div>

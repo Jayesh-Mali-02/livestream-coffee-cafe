@@ -38,7 +38,16 @@ export function HomePage() {
                         "addressRegion": "Gujarat",
                         "addressCountry": "IN"
                       },
-                      "openingHours": "Mo-Su 09:00-00:00"
+                      "openingHours": "Mo-Su 09:00-00:00",
+                      "sameAs": [
+                        "https://www.instagram.com/livestreamcoffee",
+                        "https://jsdl.in/DT-541CENB8QKS",
+                        "https://share.google/s0sXr25rBMlSOlkHr",
+                        "https://share.google/kQO7NigA02NOH0sEb",
+                        "https://share.google/DOq0lnECyR1te2YQ7",
+                        "https://share.google/WXmpNOCzM12c8yrSK",
+                        "https://share.google/kgHGboI0tuIEcI3R9"
+                      ]
                     }
                     `}
                 </script>

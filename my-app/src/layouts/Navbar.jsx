@@ -42,7 +42,15 @@ export function Navbar() {
                             const active = page === n.id;
                             const path = n.id === 'home' ? '/' : `/${n.id}`;
                             return (
-                                <Link key={n.id} to={path} className="nav-pill" style={{
+                                <Link key={n.id} to={path} 
+                                    onMouseEnter={() => {
+                                        // Simple prefetch strategy: dynamically import the chunk on hover
+                                        if (n.id === 'about') import('../pages/AboutPage');
+                                        if (n.id === 'menu') import('../pages/MenuPage');
+                                        if (n.id === 'gallery') import('../pages/GalleryPage');
+                                        if (n.id === 'contact') import('../pages/ContactPage');
+                                    }}
+                                    className="nav-pill" style={{
                                     padding: "9px 18px", borderRadius: 50, border: "none", fontSize: ".86rem",
                                     fontWeight: active ? 600 : 400,
                                     color: active ? "#fff" : (transp ? "rgba(255,255,255,.82)" : T.berry),

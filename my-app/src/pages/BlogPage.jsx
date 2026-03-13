@@ -44,7 +44,7 @@ const ARTICLES = [
         date: 'October 12, 2026',
         readTime: '4 min read',
         tag: 'Culture',
-        img: '/assets/images/gallery/g2.jpg',
+        img: '/assets/images/gallery/g2.webp',
     },
     {
         id: 'best-places-to-work-vesu',
@@ -53,7 +53,7 @@ const ARTICLES = [
         date: 'September 28, 2026',
         readTime: '3 min read',
         tag: 'Community',
-        img: '/assets/images/gallery/g4.jpg',
+        img: '/assets/images/gallery/g4.webp',
     },
     {
         id: 'understanding-espresso-notes',
@@ -62,7 +62,7 @@ const ARTICLES = [
         date: 'August 15, 2026',
         readTime: '5 min read',
         tag: 'Education',
-        img: '/assets/images/gallery/g7.jpg',
+        img: '/assets/images/gallery/g7.webp',
     },
 ];
 

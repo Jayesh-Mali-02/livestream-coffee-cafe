@@ -56,7 +56,7 @@ export function AboutPage() {
                                     background: T.linen
                                 }}>
                                     <img 
-                                        src="/assets/images/about/main.jpg" 
+                                        src="/assets/images/about/main.webp" 
                                         alt="Livestream Coffee Interior" 
                                         loading="lazy"
                                         style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} 
@@ -80,7 +80,7 @@ export function AboutPage() {
                                     zIndex: 2
                                 }}>
                                     <img 
-                                        src="/assets/images/about/badge.jpg" 
+                                        src="/assets/images/about/badge.webp" 
                                         alt="Livestream Detail" 
                                         loading="lazy"
                                         style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} 

@@ -118,12 +118,26 @@ export function AboutPage() {
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 22 }} className="g4">
                         {VALUES.map((v, i) => (
                             <Fade key={v.title} delay={i * .08}>
-                                <div className="lift" style={{ background: "#fff", borderRadius: 22, padding: "32px 26px", boxShadow: "0 2px 16px rgba(91,26,26,.07)", border: `1px solid ${T.linen}`, textAlign: "center", height: "100%" }}>
-                                    <div style={{ width: 60, height: 60, borderRadius: 18, background: `linear-gradient(135deg,${T.wine},${T.rose})`, margin: "0 auto 20px", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 6px 20px rgba(91,26,26,.18)" }}>
+                                <div className="val-card" style={{ background: "#fff", borderRadius: 22, padding: "34px 26px", boxShadow: "0 4px 24px rgba(91,26,26,.05)", border: `1px solid ${T.linen}`, textAlign: "center", height: "100%", transition: "all .4s cubic-bezier(.22,1,.36,1)" }}
+                                    onMouseEnter={e => {
+                                        e.currentTarget.style.transform = "translateY(-8px)";
+                                        e.currentTarget.style.border = `1px solid ${T.gold}50`;
+                                        e.currentTarget.style.boxShadow = "0 16px 32px rgba(91,26,26,.1)";
+                                        e.currentTarget.querySelector('.val-icon').style.transform = "scale(1.15) rotate(5deg)";
+                                        e.currentTarget.querySelector('.val-icon').style.boxShadow = "0 12px 28px rgba(91,26,26,.25)";
+                                    }}
+                                    onMouseLeave={e => {
+                                        e.currentTarget.style.transform = "none";
+                                        e.currentTarget.style.border = `1px solid ${T.linen}`;
+                                        e.currentTarget.style.boxShadow = "0 4px 24px rgba(91,26,26,.05)";
+                                        e.currentTarget.querySelector('.val-icon').style.transform = "none";
+                                        e.currentTarget.querySelector('.val-icon').style.boxShadow = "0 6px 20px rgba(91,26,26,.18)";
+                                    }}>
+                                    <div className="val-icon" style={{ width: 60, height: 60, borderRadius: 18, background: `linear-gradient(135deg,${T.wine},${T.rose})`, margin: "0 auto 24px", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 6px 20px rgba(91,26,26,.18)", transition: "all .4s cubic-bezier(.22,1,.36,1)" }}>
                                         {ICON_MAP[v.iconKey] && ICON_MAP[v.iconKey](28, "#fff")}
                                     </div>
-                                    <h3 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.35rem", fontWeight: 700, color: T.dark, marginBottom: 10 }}>{v.title}</h3>
-                                    <p style={{ fontSize: ".84rem", color: T.mink, lineHeight: 1.8 }}>{v.desc}</p>
+                                    <h3 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(1.25rem,2.5vw,1.4rem)", fontWeight: 700, color: T.dark, marginBottom: 12 }}>{v.title}</h3>
+                                    <p style={{ fontSize: ".88rem", color: T.mink, lineHeight: 1.85 }}>{v.desc}</p>
                                 </div>
                             </Fade>
                         ))}
@@ -138,11 +152,25 @@ export function AboutPage() {
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 28, maxWidth: 880, margin: "0 auto" }} className="g3">
                         {TEAM.map((m, i) => (
                             <Fade key={m.name} delay={i * .1}>
-                                <div className="lift" style={{ background: T.cream, borderRadius: 22, padding: "40px 28px 32px", textAlign: "center", boxShadow: "0 2px 16px rgba(91,26,26,.07)", border: `1px solid ${T.linen}` }}>
-                                    <div style={{ width: 80, height: 80, borderRadius: "50%", background: `linear-gradient(135deg,${T.berry},${T.dark})`, margin: "0 auto 20px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "2rem", boxShadow: "0 6px 22px rgba(91,26,26,.22)" }}>{m.emoji}</div>
-                                    <h3 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.4rem", fontWeight: 700, color: T.dark, marginBottom: 4 }}>{m.name}</h3>
-                                    <p style={{ fontSize: ".72rem", color: T.rose, letterSpacing: ".06em", textTransform: "uppercase", fontWeight: 600, marginBottom: 10 }}>{m.role}</p>
-                                    <p style={{ fontSize: ".83rem", color: T.mink, lineHeight: 1.7, fontStyle: "italic" }}>{m.bio}</p>
+                                <div className="team-card" style={{ background: T.cream, borderRadius: 22, padding: "40px 28px 32px", textAlign: "center", boxShadow: "0 4px 24px rgba(91,26,26,.05)", border: `1px solid ${T.linen}`, transition: "all .4s cubic-bezier(.22,1,.36,1)" }}
+                                    onMouseEnter={e => {
+                                        e.currentTarget.style.transform = "translateY(-6px)";
+                                        e.currentTarget.style.boxShadow = "0 16px 32px rgba(91,26,26,.1)";
+                                        e.currentTarget.querySelector('.team-emoji').style.transform = "scale(1.15) translateY(-4px)";
+                                        e.currentTarget.querySelector('.team-emoji').style.boxShadow = "0 12px 30px rgba(91,26,26,.28)";
+                                        e.currentTarget.querySelector('.team-role').style.color = T.gold;
+                                    }}
+                                    onMouseLeave={e => {
+                                        e.currentTarget.style.transform = "none";
+                                        e.currentTarget.style.boxShadow = "0 4px 24px rgba(91,26,26,.05)";
+                                        e.currentTarget.querySelector('.team-emoji').style.transform = "none";
+                                        e.currentTarget.querySelector('.team-emoji').style.boxShadow = "0 6px 22px rgba(91,26,26,.22)";
+                                        e.currentTarget.querySelector('.team-role').style.color = T.rose;
+                                    }}>
+                                    <div className="team-emoji" style={{ width: 80, height: 80, borderRadius: "50%", background: `linear-gradient(135deg,${T.berry},${T.dark})`, margin: "0 auto 24px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "2rem", boxShadow: "0 6px 22px rgba(91,26,26,.22)", transition: "all .4s cubic-bezier(.22,1,.36,1)" }}>{m.emoji}</div>
+                                    <h3 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(1.3rem, 2.5vw, 1.5rem)", fontWeight: 700, color: T.dark, marginBottom: 8 }}>{m.name}</h3>
+                                    <p className="team-role" style={{ fontSize: ".72rem", color: T.rose, letterSpacing: ".06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 12, transition: "color .3s ease" }}>{m.role}</p>
+                                    <p style={{ fontSize: ".88rem", color: T.mink, lineHeight: 1.75, fontStyle: "italic" }}>"{m.bio}"</p>
                                 </div>
                             </Fade>
                         ))}

@@ -173,16 +173,29 @@ export function HomePage() {
                             { icon: <IcSofa s={26} c="#fff" />, title: "Cozy Ambiance", desc: "A thoughtfully designed space where you can work, meet friends, or simply breathe.", cta: "Visit Us", pg: "contact" },
                         ].map((c, i) => (
                             <Fade key={c.title} delay={i * .1}>
-                                <div className="lift" style={{ background: "#fff", borderRadius: 22, padding: "38px 32px 32px", boxShadow: "0 2px 20px rgba(91,26,26,.07)", border: `1px solid ${T.linen}`, height: "100%", display: "flex", flexDirection: "column" }}>
+                                <div className="off-card" style={{ background: "#fff", borderRadius: 22, padding: "38px 32px 32px", boxShadow: "0 4px 24px rgba(91,26,26,.05)", border: `1px solid ${T.linen}`, height: "100%", display: "flex", flexDirection: "column", cursor: "pointer", transition: "all .4s cubic-bezier(.22,1,.36,1)" }}
+                                    onClick={() => setPage(c.pg)}
+                                    onMouseEnter={e => {
+                                        e.currentTarget.style.transform = "translateY(-8px)";
+                                        e.currentTarget.style.boxShadow = "0 16px 40px rgba(91,26,26,.12)";
+                                        e.currentTarget.querySelector('.off-icon').style.transform = "scale(1.1) rotate(-5deg)";
+                                        e.currentTarget.querySelector('.off-btn').style.background = T.berry;
+                                        e.currentTarget.querySelector('.off-btn').style.color = "#fff";
+                                    }}
+                                    onMouseLeave={e => {
+                                        e.currentTarget.style.transform = "none";
+                                        e.currentTarget.style.boxShadow = "0 4px 24px rgba(91,26,26,.05)";
+                                        e.currentTarget.querySelector('.off-icon').style.transform = "none";
+                                        e.currentTarget.querySelector('.off-btn').style.background = "transparent";
+                                        e.currentTarget.querySelector('.off-btn').style.color = T.berry;
+                                    }}>
                                     {/* Icon circle */}
-                                    <div style={{ width: 56, height: 56, borderRadius: 16, background: `linear-gradient(135deg,${T.wine},${T.rose})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.5rem", marginBottom: 22, boxShadow: `0 6px 20px rgba(91,26,26,.2)` }}>{c.icon}</div>
-                                    <h3 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.65rem", fontWeight: 700, color: T.dark, marginBottom: 10, lineHeight: 1.15 }}>{c.title}</h3>
-                                    <p style={{ fontSize: ".88rem", color: T.mink, lineHeight: 1.85, flex: 1 }}>{c.desc}</p>
-                                    <button onClick={() => setPage(c.pg)} style={{ marginTop: 24, padding: "10px 22px", background: "transparent", color: T.berry, fontSize: ".82rem", fontWeight: 600, border: `1.5px solid ${T.berry}`, borderRadius: 50, cursor: "pointer", alignSelf: "flex-start", transition: "all .3s ease" }}
-                                        onMouseEnter={e => { e.currentTarget.style.background = T.berry; e.currentTarget.style.color = "#fff"; }}
-                                        onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = T.berry; }}>
+                                    <div className="off-icon" style={{ width: 56, height: 56, borderRadius: 16, background: `linear-gradient(135deg,${T.wine},${T.rose})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.5rem", marginBottom: 22, boxShadow: `0 6px 20px rgba(91,26,26,.15)`, transition: "transform .4s cubic-bezier(.22,1,.36,1)" }}>{c.icon}</div>
+                                    <h3 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(1.4rem,3vw,1.75rem)", fontWeight: 700, color: T.dark, marginBottom: 12, lineHeight: 1.15 }}>{c.title}</h3>
+                                    <p style={{ fontSize: ".92rem", color: T.mink, lineHeight: 1.85, flex: 1 }}>{c.desc}</p>
+                                    <div className="off-btn" style={{ marginTop: 24, padding: "10px 22px", background: "transparent", color: T.berry, fontSize: ".82rem", fontWeight: 600, border: `1.5px solid ${T.berry}`, borderRadius: 50, cursor: "pointer", alignSelf: "flex-start", transition: "all .4s ease" }}>
                                         {c.cta} →
-                                    </button>
+                                    </div>
                                 </div>
                             </Fade>
                         ))}
@@ -202,11 +215,23 @@ export function HomePage() {
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20 }} className="g4">
                         {TESTIMONIALS.map((t, i) => (
                             <Fade key={t.name} delay={i * .09}>
-                                <div className="tcard" style={{ background: "#fff", borderRadius: 20, padding: "28px 24px", boxShadow: "0 2px 16px rgba(91,26,26,.07)", border: `1px solid ${T.linen}`, height: "100%", display: "flex", flexDirection: "column", position: "relative" }}>
+                                <div className="tcard" style={{ background: "#fff", borderRadius: 20, padding: "28px 24px", boxShadow: "0 4px 24px rgba(91,26,26,.05)", border: `1px solid ${T.linen}`, height: "100%", display: "flex", flexDirection: "column", position: "relative", transition: "all .4s cubic-bezier(.22,1,.36,1)" }}
+                                    onMouseEnter={e => {
+                                        e.currentTarget.style.transform = "translateY(-6px)";
+                                        e.currentTarget.style.boxShadow = "0 12px 32px rgba(91,26,26,.1)";
+                                        e.currentTarget.querySelector('.t-quote').style.color = T.gold;
+                                        e.currentTarget.querySelector('.t-quote').style.opacity = "0.4";
+                                    }}
+                                    onMouseLeave={e => {
+                                        e.currentTarget.style.transform = "none";
+                                        e.currentTarget.style.boxShadow = "0 4px 24px rgba(91,26,26,.05)";
+                                        e.currentTarget.querySelector('.t-quote').style.color = T.linen;
+                                        e.currentTarget.querySelector('.t-quote').style.opacity = "1";
+                                    }}>
                                     {/* Decorative quote */}
-                                    <div style={{ fontFamily: "Georgia,serif", fontSize: "4rem", lineHeight: .7, color: T.linen, position: "absolute", top: 18, left: 22, userSelect: "none", pointerEvents: "none" }}>"</div>
-                                    <div style={{ color: T.gold, fontSize: ".85rem", letterSpacing: 3, marginBottom: 14, marginTop: 16 }}>{"★".repeat(t.stars)}</div>
-                                    <p style={{ fontSize: ".87rem", color: T.espr, lineHeight: 1.8, flex: 1, position: "relative", zIndex: 1 }}>{t.text}</p>
+                                    <div className="t-quote" style={{ fontFamily: "Georgia,serif", fontSize: "4rem", lineHeight: .7, color: T.linen, position: "absolute", top: 18, left: 22, userSelect: "none", pointerEvents: "none", transition: "all .4s ease" }}>"</div>
+                                    <div style={{ color: T.gold, fontSize: ".85rem", letterSpacing: 3, marginBottom: 16, marginTop: 18 }}>{"★".repeat(t.stars)}</div>
+                                    <p style={{ fontSize: ".9rem", color: T.espr, lineHeight: 1.85, flex: 1, position: "relative", zIndex: 1 }}>{t.text}</p>
                                     <div style={{ marginTop: 20, paddingTop: 16, borderTop: `1px solid ${T.linen}`, display: "flex", alignItems: "center", gap: 10 }}>
                                         <div style={{ width: 34, height: 34, borderRadius: "50%", background: `linear-gradient(135deg,${T.wine},${T.rose})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: ".85rem", color: "#fff", fontWeight: 700, flexShrink: 0 }}>
                                             {t.name[0]}

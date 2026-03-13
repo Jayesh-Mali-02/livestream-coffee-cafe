@@ -12,8 +12,10 @@
     "video:build": "remotion render src/remotion/index.js MyVideo out/video.mp4"
   },
   "dependencies": {
+    "@preact/preset-vite": "^2.10.3",
     "@remotion/cli": "^4.0.435",
     "@supabase/supabase-js": "^2.99.1",
+    "preact": "^10.29.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^3.0.0",

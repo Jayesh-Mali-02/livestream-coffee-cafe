@@ -4,7 +4,6 @@ import { Fade } from '../components/ui/Fade';
 import { T, ZOMATO_URL, SWIGGY_URL } from '../utils/constants';
 import { DRINKS, FOOD } from '../data/menu'; // Fallback
 import { IcCoffee, IcUtensils, IcWhatsApp, IcGlass, IcTea, IcBlender, IcSandwich, IcBowl, IcSalad, IcCake } from '../components/ui/Icons';
-import { supabase } from '../lib/supabase';
 
 /* ─── Item row — matches .mrow from global.css ─────────── */
 function ItemRow({ item, isLast }) {
@@ -121,6 +120,8 @@ export function MenuPage() {
         async function fetchMenu() {
             setLoading(true);
             try {
+                const { supabase } = await import('../lib/supabase');
+                
                 // Check if Supabase is connected
                 if (supabase.supabaseUrl === 'https://placeholder.supabase.co') {
                    console.log("Using static data as Supabase is not configured.");

@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet-async';
 import { Fade } from '../components/ui/Fade';
 import { T, BRANCHES, WHATSAPP, INSTA } from '../utils/constants';
 import { IcClock, IcWhatsApp, IcInstagram, IcStar, IcPin } from '../components/ui/Icons';
-import { supabase } from '../lib/supabase';
 
 export function ContactPage() {
     const [activeBranch, setActiveBranch] = useState(0);
@@ -17,6 +16,7 @@ export function ContactPage() {
         
         try {
             // Log to Supabase if configured
+            const { supabase } = await import('../lib/supabase');
             if (supabase.supabaseUrl !== 'https://placeholder.supabase.co') {
                 const { error } = await supabase
                     .from('contact_messages')

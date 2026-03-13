@@ -4,7 +4,6 @@ import { Fade } from '../components/ui/Fade';
 import { T, INSTA } from '../utils/constants';
 import { GALLERY } from '../data/gallery'; // Fallback
 import { IcInstagram } from '../components/ui/Icons';
-import { supabase } from '../lib/supabase';
 
 /* ─── Staggered scroll reveal hook ───────────────────────────────────────── */
 function useReveal(total) {
@@ -185,6 +184,7 @@ export function GalleryPage() {
     useEffect(() => {
         async function fetchGallery() {
             try {
+                const { supabase } = await import('../lib/supabase');
                 if (supabase.supabaseUrl === 'https://placeholder.supabase.co') {
                     setLoading(false);
                     return;

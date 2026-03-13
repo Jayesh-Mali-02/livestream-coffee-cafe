@@ -16,6 +16,8 @@ export const T = {
 
 export const WHATSAPP = "919XXXXXXXXX";
 export const INSTA = "https://www.instagram.com/livestreamcoffee";
+export const ZOMATO_URL = "#"; // Replace with actual Zomato link
+export const SWIGGY_URL = "#"; // Replace with actual Swiggy link
 
 export const BRANCHES = [
     {
@@ -49,6 +51,7 @@ export const NAV = [
     { id: "about", label: "About Us" },
     { id: "menu", label: "Menu" },
     { id: "gallery", label: "Gallery" },
+    { id: "blog", label: "Journal" },
     { id: "contact", label: "Contact Us" },
 ];
 

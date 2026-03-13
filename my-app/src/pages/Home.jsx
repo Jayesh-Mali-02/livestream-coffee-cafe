@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useScrollY } from '../hooks/useScrollY';
 import { Fade } from '../components/ui/Fade';
 import { SectionHead } from '../components/ui/SectionHead';
-import { BRANCHES, T, TESTIMONIALS, WHATSAPP } from '../utils/constants';
+import { BRANCHES, T, TESTIMONIALS, WHATSAPP, ZOMATO_URL, SWIGGY_URL } from '../utils/constants';
 import { IcUsers, IcUtensils, IcStar, IcTrophy, IcDiamond, LogoSVG, IcClock, IcCalendar, IcPin, IcCoffee, IcSofa, IcWhatsApp } from '../components/ui/Icons';
 
 export function HomePage() {
@@ -46,7 +46,9 @@ export function HomePage() {
                         "https://share.google/kQO7NigA02NOH0sEb",
                         "https://share.google/DOq0lnECyR1te2YQ7",
                         "https://share.google/WXmpNOCzM12c8yrSK",
-                        "https://share.google/kgHGboI0tuIEcI3R9"
+                        "https://share.google/kgHGboI0tuIEcI3R9",
+                        "${ZOMATO_URL}",
+                        "${SWIGGY_URL}"
                       ]
                     }
                     `}

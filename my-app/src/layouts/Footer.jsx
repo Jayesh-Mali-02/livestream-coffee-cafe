@@ -1,5 +1,5 @@
 import React from 'react';
-import { T, INSTA, WHATSAPP, NAV } from '../utils/constants';
+import { T, INSTA, WHATSAPP, NAV, ZOMATO_URL, SWIGGY_URL } from '../utils/constants';
 import { LogoSVG, IcInstagram, IcWhatsApp } from '../components/ui/Icons';
 import { Link } from 'react-router-dom';
 
@@ -25,6 +25,18 @@ export function Footer() {
                                 onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,.12)"; e.currentTarget.style.color = "#fff"; }}
                                 onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,.06)"; e.currentTarget.style.color = "rgba(255,255,255,.65)"; }}>
                                 🌟 Rate on Justdial
+                            </a>
+                            <a href={ZOMATO_URL} target="_blank" rel="noopener noreferrer"
+                                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "9px 18px", background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.1)", borderRadius: 50, fontSize: ".79rem", color: "rgba(255,255,255,.65)", transition: "all .3s ease" }}
+                                onMouseEnter={e => { e.currentTarget.style.background = "#E23744"; e.currentTarget.style.color = "#fff"; e.currentTarget.style.borderColor = "#E23744"; }}
+                                onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,.06)"; e.currentTarget.style.color = "rgba(255,255,255,.65)"; e.currentTarget.style.borderColor = "rgba(255,255,255,.1)"; }}>
+                                🏍 Order on Zomato
+                            </a>
+                            <a href={SWIGGY_URL} target="_blank" rel="noopener noreferrer"
+                                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "9px 18px", background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.1)", borderRadius: 50, fontSize: ".79rem", color: "rgba(255,255,255,.65)", transition: "all .3s ease" }}
+                                onMouseEnter={e => { e.currentTarget.style.background = "#FC8019"; e.currentTarget.style.color = "#fff"; e.currentTarget.style.borderColor = "#FC8019"; }}
+                                onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,.06)"; e.currentTarget.style.color = "rgba(255,255,255,.65)"; e.currentTarget.style.borderColor = "rgba(255,255,255,.1)"; }}>
+                                🛵 Order on Swiggy
                             </a>
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Fade } from '../components/ui/Fade';
-import { T } from '../utils/constants';
+import { T, ZOMATO_URL, SWIGGY_URL } from '../utils/constants';
 import { DRINKS, FOOD } from '../data/menu';
 import { IcCoffee, IcUtensils, IcWhatsApp } from '../components/ui/Icons';
 
@@ -142,9 +142,18 @@ export function MenuPage() {
                         <h1 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 'clamp(2.8rem,6vw,5.2rem)', fontWeight: 700, color: '#fff', lineHeight: 1, margin: 0 }}>
                             Our Menu
                         </h1>
-                        <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,.5)', marginTop: 14, maxWidth: 440, lineHeight: 1.7 }}>
+                        <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,.5)', marginTop: 14, maxWidth: 440, lineHeight: 1.7, marginBottom: 28 }}>
                             Handcrafted beverages and fresh food — made with love, served with care.
                         </p>
+                        <div style={{ display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
+                            <span style={{ fontSize: ".75rem", color: "rgba(255,255,255,.4)", textTransform: "uppercase", letterSpacing: ".08em", fontWeight: 600, marginRight: 8 }}>Order Online:</span>
+                            <a href={ZOMATO_URL} target="_blank" rel="noopener noreferrer" style={{ padding: "10px 24px", background: "#E23744", color: "#fff", fontSize: ".82rem", fontWeight: 700, borderRadius: 50, boxShadow: "0 6px 20px rgba(226,55,68,.25)", display: "inline-flex", alignItems: "center", gap: 8, textDecoration: "none", transition: "transform 0.2s" }} onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.04)"; }} onMouseLeave={e => { e.currentTarget.style.transform = ""; }}>
+                                🏍 Zomato
+                            </a>
+                            <a href={SWIGGY_URL} target="_blank" rel="noopener noreferrer" style={{ padding: "10px 24px", background: "#FC8019", color: "#fff", fontSize: ".82rem", fontWeight: 700, borderRadius: 50, boxShadow: "0 6px 20px rgba(252,128,25,.25)", display: "inline-flex", alignItems: "center", gap: 8, textDecoration: "none", transition: "transform 0.2s" }} onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.04)"; }} onMouseLeave={e => { e.currentTarget.style.transform = ""; }}>
+                                🛵 Swiggy
+                            </a>
+                        </div>
                     </Fade>
                 </div>
             </section>

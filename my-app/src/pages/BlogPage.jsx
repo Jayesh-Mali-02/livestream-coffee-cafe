@@ -1,8 +1,43 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Fade } from '../components/ui/Fade';
 import { SectionHead } from '../components/ui/SectionHead';
-import { T } from '../utils/constants';
+import { T, INSTA } from '../utils/constants';
+
+/* ─── Custom Hook: Lazy Load Instagram Embeds ─── */
+function useInstagramEmbed() {
+    const [isLoaded, setIsLoaded] = useState(false);
+    const containerRef = useRef(null);
+
+    useEffect(() => {
+        // If script is already somehow present, just process it
+        if (window.instgrm) {
+            window.instgrm.Embeds.process();
+            setIsLoaded(true);
+            return;
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !isLoaded) {
+                const script = document.createElement('script');
+                script.src = "//www.instagram.com/embed.js";
+                script.async = true;
+                script.onload = () => {
+                    if (window.instgrm) window.instgrm.Embeds.process();
+                    setIsLoaded(true);
+                };
+                document.body.appendChild(script);
+                observer.disconnect();
+            }
+        }, { rootMargin: '200px' }); // Load script 200px before it enters viewport
+
+        if (containerRef.current) observer.observe(containerRef.current);
+
+        return () => observer.disconnect();
+    }, [isLoaded]);
+
+    return containerRef;
+}
 
 const ARTICLES = [
     {
@@ -35,6 +70,8 @@ const ARTICLES = [
 ];
 
 export function BlogPage() {
+    const instaRef = useInstagramEmbed();
+
     return (
         <div className="page">
             <Helmet>
@@ -133,6 +170,43 @@ export function BlogPage() {
                             </button>
                         </div>
                     </Fade>
+                </div>
+            </section>
+
+            {/* ── INSTAGRAM SECTION (LAZY LOADED) ── */}
+            <section ref={instaRef} style={{ padding: '90px 0 120px', background: "#fff", borderTop: `1px solid ${T.linen}` }} className="spad">
+                <div style={{ maxWidth: 1000, margin: '0 auto', padding: '0 28px' }}>
+                    <Fade>
+                        <div style={{ textAlign: "center", marginBottom: 50 }}>
+                            <span style={{ display: "inline-block", fontSize: ".65rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: T.gold, marginBottom: 12 }}>Stay Connected</span>
+                            <h2 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2rem, 4vw, 2.8rem)", fontWeight: 700, color: T.dark, lineHeight: 1.1 }}>From The Gram</h2>
+                            <p style={{ fontSize: ".9rem", color: T.mink, marginTop: 12, maxWidth: 400, margin: "12px auto 0" }}>Daily brews, behind-the-scenes, and community vibes. Follow us <a href={`https://instagram.com/${INSTA}`} target="_blank" rel="noopener noreferrer" style={{ color: T.berry, fontWeight: 700 }}>@{INSTA}</a></p>
+                        </div>
+                    </Fade>
+
+                    <div style={{ 
+                        display: "grid", 
+                        gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", 
+                        gap: 30,
+                        alignItems: "start"
+                    }}>
+                        {/* 
+                            NOTE: These are placeholder blockquotes. 
+                            To replace them with real posts: 
+                            1. Go to Instagram -> 3 dots -> Embed -> Copy Embed Code
+                            2. Paste the <blockquote> part here. Do NOT paste the <script> tag. 
+                        */}
+                        <Fade delay={0.1}>
+                            <div style={{ background: T.cream, borderRadius: 16, overflow: "hidden", minHeight: 400, boxShadow: "0 4px 20px rgba(0,0,0,.03)" }}>
+                                <blockquote className="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DB1v-X6zK7P/" data-instgrm-version="14" style={{ background:"#FFF", border:"0", margin:"0", padding:"0", width:"100%" }}></blockquote>
+                            </div>
+                        </Fade>
+                        <Fade delay={0.2}>
+                            <div style={{ background: T.cream, borderRadius: 16, overflow: "hidden", minHeight: 400, boxShadow: "0 4px 20px rgba(0,0,0,.03)" }}>
+                                <blockquote className="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DBM5TqRzZzV/" data-instgrm-version="14" style={{ background:"#FFF", border:"0", margin:"0", padding:"0", width:"100%" }}></blockquote>
+                            </div>
+                        </Fade>
+                    </div>
                 </div>
             </section>
         </div>

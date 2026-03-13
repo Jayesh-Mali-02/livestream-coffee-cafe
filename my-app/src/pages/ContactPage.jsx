@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Fade } from '../components/ui/Fade';
 import { T, BRANCHES, WHATSAPP, INSTA } from '../utils/constants';
 import { IcClock, IcWhatsApp, IcInstagram, IcStar, IcPin } from '../components/ui/Icons';
+import { supabase } from '../lib/supabase';
 
 export function ContactPage() {
     const [activeBranch, setActiveBranch] = useState(0);
@@ -11,8 +12,28 @@ export function ContactPage() {
 
     const handleFormChange = (e) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
-    const handleFormSubmit = () => {
+    const handleFormSubmit = async () => {
         if (!form.name || !form.email || !form.message) return;
+        
+        try {
+            // Log to Supabase if configured
+            if (supabase.supabaseUrl !== 'https://placeholder.supabase.co') {
+                const { error } = await supabase
+                    .from('contact_messages')
+                    .insert([
+                        { 
+                            name: form.name, 
+                            email: form.email, 
+                            subject: form.subject, 
+                            message: `Branch: ${form.branch}\nPhone: ${form.phone || 'N/A'}\n\n${form.message}`,
+                        }
+                    ]);
+                if (error) console.error("Could not save message to database:", error);
+            }
+        } catch (err) {
+            console.error(err);
+        }
+
         const messageBody = `👋 *New Website Message*\n\n*Branch:* ${form.branch}\n*Subject:* ${form.subject}\n*Name:* ${form.name}\n*Email:* ${form.email}\n*Phone:* ${form.phone || "Not provided"}\n\n*Message:*\n${form.message}`;
         window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(messageBody)}`, "_blank");
         
@@ -172,10 +193,10 @@ function ContactForm({ form, handle, submit, sent }) {
                     
                     <textarea name="message" aria-label="Your Message" placeholder="Your Message *" rows={5} value={form.message} onChange={handle} className="finp" style={{ ...inputStyle, resize: "vertical", minHeight: 110 }} />
 
-                    <button onClick={submit} className="btn-p" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "16px 32px", background: sent ? "#1ebe57" : "#25D366", color: "#fff", fontSize: ".95rem", fontWeight: 600, borderRadius: 50, border: "none", boxShadow: "0 6px 22px rgba(37,211,102,.3)", letterSpacing: ".03em" }}>
-                        {sent ? <><IcStar s={18} c="#fff" filled /> Sent!</> : <><IcWhatsApp s={20} /> Send on WhatsApp</>}
+                    <button onClick={submit} className="btn-p" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "16px 32px", background: sent ? "#1ebe57" : "#25D366", color: "#fff", fontSize: ".95rem", fontWeight: 600, borderRadius: 50, border: "none", boxShadow: "0 6px 22px rgba(37,211,102,.3)", letterSpacing: ".03em", cursor: "pointer" }}>
+                        {sent ? <><IcStar s={18} c="#fff" filled /> Sent!</> : <><IcWhatsApp s={20} /> Send Message & WhatsApp</>}
                     </button>
-                    <p style={{ fontSize: ".73rem", color: T.mink, textAlign: "center", lineHeight: 1.5 }}>Tapping opens WhatsApp with your message pre-filled.<br />Your details are never stored by this website.</p>
+                    <p style={{ fontSize: ".73rem", color: T.mink, textAlign: "center", lineHeight: 1.5 }}>Tapping sends your message to our team and opens WhatsApp.<br />Your details are stored securely.</p>
                 </div>
             </div>
         </Fade>

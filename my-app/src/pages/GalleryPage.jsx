@@ -2,8 +2,9 @@ import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import { Helmet } from 'react-helmet-async';
 import { Fade } from '../components/ui/Fade';
 import { T, INSTA } from '../utils/constants';
-import { GALLERY } from '../data/gallery';
+import { GALLERY } from '../data/gallery'; // Fallback
 import { IcInstagram } from '../components/ui/Icons';
+import { supabase } from '../lib/supabase';
 
 /* ─── Staggered scroll reveal hook ───────────────────────────────────────── */
 function useReveal(total) {
@@ -178,17 +179,51 @@ function TiltCard({ item, index, onClick, revealed }) {
 /* ─── Main page ─────────────────────────────────────────────────────────── */
 export function GalleryPage() {
     const [light, setLight] = useState(null);
-    const { visible, setRef } = useReveal(GALLERY.length);
+    const [galleryData, setGalleryData] = useState(GALLERY);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchGallery() {
+            try {
+                if (supabase.supabaseUrl === 'https://placeholder.supabase.co') {
+                    setLoading(false);
+                    return;
+                }
+                const { data, error } = await supabase
+                    .from('gallery_images')
+                    .select('*')
+                    .order('display_order', { ascending: true });
+                
+                if (error) throw error;
+                if (data && data.length > 0) {
+                    // Map database columns to component props
+                    const formatted = data.map(item => ({
+                        bg: `url('${item.image_url}')`,
+                        h: item.title === 'Landscape' ? 240 : (item.title === 'Portrait' ? 360 : 300), // Approximate heights
+                        label: item.title
+                    }));
+                    setGalleryData(formatted);
+                }
+            } catch (err) {
+                console.error("Error fetching gallery:", err);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchGallery();
+    }, []);
+
+    const { visible, setRef } = useReveal(galleryData.length);
 
     // Shuffle images on every mount
     const shuffledGallery = useMemo(() => {
-        const arr = GALLERY.map((item, i) => ({ ...item, originalIndex: i }));
+        const arr = galleryData.map((item, i) => ({ ...item, originalIndex: i }));
         for (let i = arr.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [arr[i], arr[j]] = [arr[j], arr[i]];
         }
         return arr;
-    }, []);
+    }, [galleryData]);
 
     // Pure CSS masonry handles responsiveness
     return (

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Fade } from '../components/ui/Fade';
 import { T, ZOMATO_URL, SWIGGY_URL } from '../utils/constants';
-import { DRINKS, FOOD } from '../data/menu';
-import { IcCoffee, IcUtensils, IcWhatsApp } from '../components/ui/Icons';
+import { DRINKS, FOOD } from '../data/menu'; // Fallback
+import { IcCoffee, IcUtensils, IcWhatsApp, IcGlass, IcTea, IcBlender, IcSandwich, IcBowl, IcSalad, IcCake } from '../components/ui/Icons';
+import { supabase } from '../lib/supabase';
 
 /* ─── Item row — matches .mrow from global.css ─────────── */
 function ItemRow({ item, isLast }) {
@@ -113,7 +114,57 @@ function CategoryCard({ cat, i }) {
 /* ─── Main page ────────────────────────────────────────── */
 export function MenuPage() {
     const [tab, setTab] = useState('drinks');
-    const DATA = tab === 'drinks' ? DRINKS : FOOD;
+    const [menuData, setMenuData] = useState({ drinks: DRINKS, food: FOOD }); // Default to static data
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchMenu() {
+            setLoading(true);
+            try {
+                // Check if Supabase is connected
+                if (supabase.supabaseUrl === 'https://placeholder.supabase.co') {
+                   console.log("Using static data as Supabase is not configured.");
+                   setLoading(false);
+                   return;
+                }
+
+                const { data, error } = await supabase
+                    .from('menu_items')
+                    .select('*')
+                    .order('category')
+                    .order('name');
+                
+                if (error) {
+                    console.error('Error fetching menu:', error);
+                    // Fallback to static
+                    setLoading(false);
+                    return;
+                }
+
+                if (data && data.length > 0) {
+                    // Group the data into the structure expected by the UI.
+                    // This is a complex mapping, we'll implement a helper.
+                    const groupedDrinks = groupMenuData(data, 'drinks');
+                    const groupedFood = groupMenuData(data, 'food');
+                    
+                    if(groupedDrinks.length > 0) {
+                       setMenuData(prev => ({...prev, drinks: groupedDrinks}));
+                    }
+                    if(groupedFood.length > 0) {
+                       setMenuData(prev => ({...prev, food: groupedFood}));
+                    }
+                }
+            } catch (err) {
+                console.error('Exception fetching menu:', err);
+            } finally {
+                setLoading(false);
+            }
+        }
+        
+        fetchMenu();
+    }, []);
+
+    const DATA = tab === 'drinks' ? menuData.drinks : menuData.food;
 
     return (
         <div className="page">
@@ -227,4 +278,61 @@ export function MenuPage() {
             </section>
         </div>
     );
+}
+
+// Map category icons
+const CATEGORY_ICONS = {
+    "Hot Coffee": <IcCoffee s={16} />,
+    "Iced Coffee": <IcGlass s={16} />,
+    "Signature Coffee Mocktails": <IcBlender s={16} />,
+    "Manual Brews": <IcCoffee s={16} />,
+    "Hot Chocolate": <IcTea s={16} />,
+    "Specialty Teas": <IcTea s={16} />,
+    "Frappe": <IcBlender s={16} />,
+    "Shakes": <IcBlender s={16} />,
+    "Mocktails": <IcGlass s={16} />,
+    "All Day Breakfast": <IcBowl s={16} />,
+    "Toasts": <IcSalad s={16} />,
+    "Sandwiches": <IcSandwich s={16} />,
+    "Appetizers": <IcSalad s={16} />,
+    "Pasta": <IcBowl s={16} />,
+    "Bowls": <IcBowl s={16} />,
+    "Desserts": <IcCake s={16} />,
+};
+
+// Map backend categories to frontend tab groups
+const DRINK_CATEGORIES = ["Hot Coffee", "Iced Coffee", "Signature Coffee Mocktails", "Manual Brews", "Hot Chocolate", "Specialty Teas", "Frappe", "Shakes", "Mocktails"];
+const FOOD_CATEGORIES = ["All Day Breakfast", "Toasts", "Sandwiches", "Appetizers", "Pasta", "Bowls", "Desserts"];
+
+// Helper to group flat database rows into the nested array structure expected by the UI.
+function groupMenuData(rows, type) {
+    const validCategories = type === 'drinks' ? DRINK_CATEGORIES : FOOD_CATEGORIES;
+    const filteredRows = rows.filter(r => validCategories.includes(r.category) && r.is_available !== false);
+    
+    // Group by category string
+    const grouped = filteredRows.reduce((acc, row) => {
+        if (!acc[row.category]) {
+            acc[row.category] = {
+                cat: row.category,
+                icon: CATEGORY_ICONS[row.category] || <IcCoffee s={16} />, // Default icon
+                items: []
+            };
+        }
+        acc[row.category].items.push({
+            name: row.name,
+            desc: row.description, // Mapped from DB to UI
+            price: row.price ? `₹${row.price}` : '₹0', // Map numeric to formatted string
+        });
+        return acc;
+    }, {});
+    
+    // Convert object back to array in the original order defined by DRINK_CATEGORIES or FOOD_CATEGORIES
+    const result = [];
+    validCategories.forEach(catName => {
+        if (grouped[catName]) {
+            result.push(grouped[catName]);
+        }
+    });
+
+    return result;
 }

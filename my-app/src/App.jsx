@@ -11,7 +11,6 @@ const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m
 const MenuPage = lazy(() => import('./pages/MenuPage').then(m => ({ default: m.MenuPage })));
 const GalleryPage = lazy(() => import('./pages/GalleryPage').then(m => ({ default: m.GalleryPage })));
 const ContactPage = lazy(() => import('./pages/ContactPage').then(m => ({ default: m.ContactPage })));
-const BlogPage = lazy(() => import('./pages/BlogPage').then(m => ({ default: m.BlogPage })));
 
 export default function App() {
     const location = useLocation();
@@ -30,7 +29,6 @@ export default function App() {
                         <Route path="/about" element={<AboutPage />} />
                         <Route path="/menu" element={<MenuPage />} />
                         <Route path="/gallery" element={<GalleryPage />} />
-                        <Route path="/blog" element={<BlogPage />} />
                         <Route path="/contact" element={<ContactPage />} />
                     </Routes>
                 </Suspense>

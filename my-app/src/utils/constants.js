@@ -51,7 +51,6 @@ export const NAV = [
     { id: "about", label: "About Us" },
     { id: "menu", label: "Menu" },
     { id: "gallery", label: "Gallery" },
-    { id: "blog", label: "Journal" },
     { id: "contact", label: "Contact Us" },
 ];
 
